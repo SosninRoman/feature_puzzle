@@ -34,6 +34,9 @@ bool Feature::read(FILE* file)
         return false;
 
     mFigure = createFigure(file, type);
+    
+    if(mFigure == nullptr)
+	    return false;
 		
     return true;
 }
