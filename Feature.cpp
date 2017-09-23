@@ -52,13 +52,21 @@ Figure* Feature::createFigure(FILE* file, int type)
     double* points = new double[n];
 
     if(fread(points, n* sizeof(double), 1, file) != 1)
+	{
+		delete[] points;
 		return nullptr;
+	}
+
+	Figure* result = nullptr;
 
 	switch ( type ) 
     {
-	case eCircle:		return new CircleFigure(points, n) ;
-	case eTriangle:     return new TriangleFigure(points, n) ;
-	case eSquare:       return new SquareFigure(points, n) ;
-    	default: return nullptr;
+	case eCircle:		result =  new CircleFigure(points, n) ; break;
+	case eTriangle:     result =  new TriangleFigure(points, n) ; break;
+	case eSquare:       result =  new SquareFigure(points, n) ; break;
+    	default: break;
     }
+
+	delete[] points;
+	return result;
 }
