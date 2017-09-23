@@ -27,11 +27,11 @@ bool Feature::read(FILE* file)
 		return false;
 
 	int type;
-    if (fread(&type, sizeof(int), 1, file) != 1)
-        return false;
+        if (fread(&type, sizeof(int), 1, file) != 1)
+            return false;
 
 	if(! type)
-		return false;
+	    return false;
 
 	mFigure = createFigure(file, type);
 		
@@ -44,9 +44,9 @@ Figure* Feature::createFigure(FILE* file, int type)
     switch ( type ) 
     {
 	case eCircle:		n = 3; break;
-    case eTriangle:     n = 6; break;
-    case eSquare:       n = 8; break;
-    default: return nullptr;
+    	case eTriangle:     	n = 6; break;
+    	case eSquare:       	n = 8; break;
+    	default: 		return nullptr;
     }
 
     double* points = new double[n];
@@ -59,6 +59,6 @@ Figure* Feature::createFigure(FILE* file, int type)
 	case eCircle:		return new CircleFigure(points, n) ;
 	case eTriangle:     return new TriangleFigure(points, n) ;
 	case eSquare:       return new SquareFigure(points, n) ;
-    default: return nullptr;
+    	default: return nullptr;
     }
 }
