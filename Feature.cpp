@@ -30,9 +30,6 @@ bool Feature::read(FILE* file)
     if (fread(&type, sizeof(int), 1, file) != 1)
         return false;
 
-    if(! type)
-        return false;
-
     mFigure = createFigure(file, type);
     
     if(mFigure == nullptr)
