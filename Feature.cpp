@@ -13,29 +13,29 @@ Feature::Feature():
 
 Feature::~Feature()
 {
-	delete mFigure;
+    delete mFigure;
 }
 
 void Feature::draw()
 {
-	mFigure->draw_figure();
+    mFigure->draw_figure();
 }
 
 bool Feature::read(FILE* file)
 {
-	if (file == nullptr)
-		return false;
+    if (file == nullptr)
+        return false;
 
-	int type;
-        if (fread(&type, sizeof(int), 1, file) != 1)
-            return false;
+    int type;
+    if (fread(&type, sizeof(int), 1, file) != 1)
+        return false;
 
-	if(! type)
-	    return false;
+    if(! type)
+        return false;
 
-	mFigure = createFigure(file, type);
+    mFigure = createFigure(file, type);
 		
-	return true;
+    return true;
 }
 
 Figure* Feature::createFigure(FILE* file, int type)
@@ -52,16 +52,16 @@ Figure* Feature::createFigure(FILE* file, int type)
     double* points = new double[n];
 
     if(fread(points, n* sizeof(double), 1, file) != 1)
-	{
-		delete[] points;
-		return nullptr;
-	}
+    {
+	delete[] points;
+	return nullptr;
+    }
 
 	Figure* result = nullptr;
 
 	switch ( type ) 
     {
-	case eCircle:		result =  new CircleFigure(points, n) ; break;
+	case eCircle:	    result =  new CircleFigure(points, n) ; break;
 	case eTriangle:     result =  new TriangleFigure(points, n) ; break;
 	case eSquare:       result =  new SquareFigure(points, n) ; break;
     	default: break;
